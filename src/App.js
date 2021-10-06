@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Modal from './Modals/Modal';
+import Contents1 from './Modals/Contents1';
+import Contents2 from './Modals/Contents2';
+import MyComponent from './MyComponent';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const App =  () => {
+
+  const [currentModal, setCurrentModal] = useState(null);
+
+  return (
+    <div>
+      <button id="button1" className="button" onClick={() => setCurrentModal('modal1')}>Open Modal 1</button>
+      <button className="button" onClick={() => setCurrentModal('modal2')}>Open Modal 2</button>     
+      
+      {currentModal ? (
+        <Modal handleModalClose={() => setCurrentModal(null)}>
+           {currentModal === "modal1" ? <Contents1 /> : <Contents2 />}
+        </Modal>
+      ): null}
+      
+      <MyComponent />
+    </div>
+  );
 }
 
 export default App;
